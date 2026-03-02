@@ -1,0 +1,5 @@
+# Vnstock MCP Server dependencies
+vnstock>=3.2.0
+vnstock_data>=2.3.0
+mcp[cli]>=1.0.0
+uvicorn>=0.30.0
