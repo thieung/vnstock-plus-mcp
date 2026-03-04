@@ -1,0 +1,8 @@
+# Vnstock MCP Server — base dependencies (always installable)
+vnstock>=3.2.0
+mcp[cli]>=1.0.0
+uvicorn>=0.30.0
+# Required by vnstock CLI installer for device identification (vnstock_data)
+pandas>=2.0.0
+vnai
+vnii

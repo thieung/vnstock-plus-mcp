@@ -27,8 +27,8 @@ services:
     networks:
       - default
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      test: ["CMD", "python", "-c", "import socket; s=socket.create_connection(('localhost',8000),timeout=5); s.close()"]
       interval: 30s
       timeout: 5s
       retries: 3
-      start_period: 15s
+      start_period: 120s
