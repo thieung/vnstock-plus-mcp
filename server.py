@@ -49,7 +49,8 @@ if _api_key:
 # ---------------------------------------------------------------------------
 mcp = FastMCP(
     "vnstock",
-    description="Vietnamese stock market data tools powered by vnstock library",
+    host=os.getenv("MCP_HOST", "0.0.0.0"),
+    port=int(os.getenv("MCP_PORT", "8000")),
 )
 
 
@@ -696,9 +697,17 @@ def main():
         logger.info("Starting vnstock MCP server (stdio transport)")
         mcp.run(transport="stdio")
     else:
-        logger.info(f"Starting vnstock MCP server (http transport on {args.host}:{args.port})")
-        mcp.run(transport="streamable-http", host=args.host, port=args.port)
+        host = args.host
+        port = args.port
+        logger.info(f"Starting vnstock MCP server (http transport on {host}:{port})")
+
+        # Update FastMCP settings with CLI args (override env defaults)
+        mcp.settings.host = host
+        mcp.settings.port = port
+
+        mcp.run(transport="streamable-http")
 
 
 if __name__ == "__main__":
     main()
+
